@@ -63,4 +63,51 @@ Date 类型重写了 toLocaleString()、toString()和 valueOf()方法。
 ### 5.1.2 日期格式化方法
 ![img_10.png](img_10.png)
 
-## 5.2 RegExp
+## 5.2 RegExp(正则表达式)
+![img_11.png](img_11.png)
+**1、exec()**
+
+RegExp 实例的主要方法是 exec()，主要用于配合捕获组使用。这个方法只接收一个参数，即要应
+用模式的字符串。如果找到了匹配项，则返回包含第一个匹配信息的数组；如果没找到匹配项，则返回
+null。返回的数组虽然是 Array 的实例，但包含两个额外的属性：index 和 input。index 是字符串
+中匹配模式的起始位置，input 是要查找的字符串。这个数组的第一个元素是匹配整个模式的字符串，
+其他元素是与表达式中的捕获组匹配的字符串。
+
+**2、test()**
+
+如果输入的文本与模式匹配，则参数返回 true，否则返回 false。这个方法适用于只想测试模式是否匹配。
+
+### 5.2.3 RegExp构造函数属性
+
+![img_12.png](img_12.png)
+
+    let text = "this has been a short summer"; 
+    let pattern = /(.)hort/g; 
+    if (pattern.test(text)) { 
+     console.log(RegExp.input); // this has been a short summer 
+     console.log(RegExp.leftContext); // this has been a 
+     console.log(RegExp.rightContext); // summer 
+     console.log(RegExp.lastMatch); // short 
+     console.log(RegExp.lastParen); // s 
+    }
+
+简写方式：
+````
+let text = "this has been a short summer"; 
+let pattern = /(.)hort/g; 
+/* 
+ * 注意：Opera 不支持简写属性名
+ * IE 不支持多行匹配
+ */ 
+if (pattern.test(text)) { 
+ console.log(RegExp.$_); // this has been a short summer 
+ console.log(RegExp["$`"]); // this has been a 
+ console.log(RegExp["$'"]); // summer 
+ console.log(RegExp["$&"]); // short 
+ console.log(RegExp["$+"]); // s 
+}
+````
+
+### 5.2.４ 模式局限
+
+## 5.3 原始值包装类型
