@@ -111,3 +111,198 @@ if (pattern.test(text)) {
 ### 5.2.４ 模式局限
 
 ## 5.3 原始值包装类型
+### 5.3.1 Boolean
+
+    let falseObject = new Boolean(false); //Boolean对象（不建议使用）
+    let result = falseObject && true; 
+    console.log(result); // true 
+
+    let falseValue = false;  //Boolean原始值
+    result = falseValue && true; 
+    console.log(result); // false 
+
+在这段代码中，我们创建一个值为 false 的 Boolean 对象。然后，在一个布尔表达式中通过&&操
+作将这个对象与一个原始值 true 组合起来。在布尔算术中，false && true 等于 false。可是，这
+个表达式是对 falseObject 对象而不是对它表示的值（false）求值。
+
+> 所有对象在布尔表达式中都会自动转换为 true，因此 falseObject 在这个表达式里实际上表示一个 true 值。那么
+true && true 当然是 true。
+
+### 5.3.2 Number 
+1、toString()方法
+
+    let num = 10; 
+    console.log(num.toString()); // "10" 
+    console.log(num.toString(2)); // "1010" 
+    console.log(num.toString(8)); // "12" 
+    console.log(num.toString(10)); // "10" 
+    console.log(num.toString(16)); // "a" 
+
+2、toFixed()
+
+toFixed()方法返回包含指定小数点位数的数值字符串，如：
+
+    let num = 10; 
+    console.log(num.toFixed(2)); // "10.00" (2表示保留两位小时)
+
+3、toExponential()
+
+返回以科学记数法（也称为指数记数法）表示的数值字符串。与 toFixed()一样，toExponential()也接收一个参数，表示结果中小数的位数。
+来看下面的例子：
+
+    let num = 10; 
+    console.log(num.toExponential(1)); // "1.0e+1"
+
+4、toPrecision()
+
+toPrecision()方法会根据情况返回最合理的输出结果，可能是固定长度，也可能是科学记数法形式。
+
+本质上，toPrecision()方法会根据数值和精度来决定调用 toFixed()还是 toExponential()。
+
+这个方法接收一个参数，表示结果中数字的总位数（不包含指数）。举例：
+    
+    let num = 99; 
+    console.log(num.toPrecision(1)); // "1e+2" 
+    console.log(num.toPrecision(2)); // "99" 
+    console.log(num.toPrecision(3)); // "99.0"
+
+5、isInteger()
+
+用于辨别一个数值是否保存为整数。有时候，小数位的 0 可能会让人误以为数值是一个浮点值：
+    
+    console.log(Number.isInteger(1)); // true 
+    console.log(Number.isInteger(1.00)); // true 
+    console.log(Number.isInteger(1.01)); // false 
+
+6、isSafeInteger()
+
+用于辨别整数是否在 Number.MIN_SAFE_INTEGER（-2^53 + 1）到 Number.MAX_SAFE_INTEGER（2^53 - 1）中。
+
+    console.log(Number.isSafeInteger(-1 * (2 ** 53))); // false 
+    console.log(Number.isSafeInteger(-1 * (2 ** 53) + 1)); // true 
+
+    console.log(Number.isSafeInteger(2 ** 53)); // false 
+    console.log(Number.isSafeInteger((2 ** 53) - 1)); // true
+
+### 5.3.3 String
+1、Javascript字符
+- length() 返回长度
+- charAt() 返回给定索引位置的字符
+
+`    let message = "abcde"; 
+    console.log(message.charAt(2)); // "c"`
+
+- charCodeAt() 查看指定码元的字符编码
+
+    `let message = "abcde"; 
+    // Unicode "Latin small letter C"的编码是 U+0063 
+    console.log(message.charCodeAt(2)); // 99 
+    // 十进制 99 等于十六进制 63 
+    console.log(99 === 0x63); // true `
+
+- fromCharCode() 根据给定的 UTF-16 码元创建字符串中的字符
+
+    `console.log(String.fromCharCode(0x61, 0x62, 0x63, 0x64, 0x65)); // "abcde" 
+    console.log(String.fromCharCode(97, 98, 99, 100, 101)); // "abcde" `
+
+2、normalize()
+
+3、字符串操作方法
+
+- concat() 将一个或多个字符串拼接成一个新字符串
+- slice()
+- substr()
+- concat()
+
+```
+let string = "hello world"
+console.log(string.slice(2))
+console.log(string.slice(2,4)) //包头不包尾
+console.log(string.slice(-2))
+
+console.log(string.substring(2))
+console.log(string.substring(2,4))//包头不包尾
+console.log(string.substring(-2)) //将所有 负参数 转换为 0
+
+console.log(string.substr(2))
+console.log(string.substr(2,4))// 包头包尾
+console.log(string.substr(-2)) // 第一个负参数值当成字符串长度加上该值，将第二个负参数值转换为 0
+```
+4、字符串位置方法
+
+- indexOf() : 从字符串开头开始查找子字符串，并返回位置
+- lastIndexOf() : 从字符串末尾开始查找子字符串，并返回位置
+
+```
+let stringValue = "hello world"; 
+console.log(stringValue.indexOf("o")); // 4 
+console.log(stringValue.lastIndexOf("o")); // 7 倒的搜第一次出现“o”的位置
+```
+
+```
+let a = "hello world"
+console.log(a.indexOf("l",4)) //从位置4开始搜索 “l”的位置
+
+console.log(a.lastIndexOf("l",7)) //从位置7开始搜索 “l”的位置 倒的开始搜索第一次出现“l”的位置
+```
+5、字符串包含方法
+
+- startWith():检查开始于索引 0 的匹配项
+- endWith():检查开始于索引(string.length - substring.length)的匹配项
+- includes():检查整个字符串
+
+```
+let message = "foobarbaz"; 
+console.log(message.startsWith("foo")); // true 
+console.log(message.startsWith("bar")); // false 
+console.log(message.endsWith("baz")); // true 
+console.log(message.endsWith("bar")); // false 
+console.log(message.includes("bar")); // true 
+console.log(message.includes("qux")); // false
+```
+startsWith()和 includes()方法接收可选的第二个参数，表示开始搜索的位置。如果传入第二
+个参数，则意味着这两个方法会从指定位置向着字符串末尾搜索，忽略该位置之前的所有字符。下面是
+一个例子：
+
+```
+let message = "foobarbaz"; 
+console.log(message.startsWith("foo")); // true 
+console.log(message.startsWith("foo", 1)); // false 
+console.log(message.includes("bar")); // true 
+console.log(message.includes("bar", 4)); // false
+```
+endsWith()方法接收可选的第二个参数，表示应该当作字符串末尾的位置。如果不提供这个参数，
+那么默认就是字符串长度。如果提供这个参数，那么就好像字符串只有那么多字符一样。
+
+6、trim()方法
+
+这个方法会创建字符串的一个副本（**原字符串不受影响**），删除前、后所有空格符，再返回结果。
+
+**trimLeft()和 trimRight()**方法分别用于从字符串开始和末尾清理空格符。
+
+7、repeat()方法
+
+这个方法接收一个整数参数，表示要将字符串复制多少次，然后返回拼接所有副本后的结果。
+````
+  let stringValue = "na "; 
+  console.log(stringValue.repeat(16) + "batman"); 
+  // na na na na na na na na na na na na na na na na batman 
+````
+8、padStart() 和 padEnd()方法
+
+![img_13.png](img_13.png)
+
+9、字符串迭代与解构
+
+字符串的原型上暴露了一个@@iterator 方法，表示可以迭代字符串的每个字符。可以像下面这样
+手动使用迭代器：
+
+  ```
+  let message = "abc"; 
+  let stringIterator = message[Symbol.iterator](); 
+  
+  console.log(stringIterator.next()); // {value: "a", done: false} 
+  console.log(stringIterator.next()); // {value: "b", done: false} 
+  console.log(stringIterator.next()); // {value: "c", done: false} 
+  console.log(stringIterator.next()); // {value: undefined, done: true}
+  ```
