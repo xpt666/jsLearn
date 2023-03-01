@@ -306,3 +306,46 @@ endsWith()方法接收可选的第二个参数，表示应该当作字符串末�
   console.log(stringIterator.next()); // {value: "c", done: false} 
   console.log(stringIterator.next()); // {value: undefined, done: true}
   ```
+在 for-of 循环中可以通过这个迭代器按序访问每个字符：
+```
+for (const c of "abcde") { 
+ console.log(c); 
+} 
+// a 
+// b 
+// c 
+// d 
+// e 
+```
+
+分割字符串：
+```angular2html
+  let message = "abcde"; 
+  console.log([...message]); // ["a", "b", "c", "d", "e"]
+```
+
+10、字符串大小写转换
+
+- toLowerCase() 和 toLocaleLowerCase()
+
+- toUpperCase() 和 toLocaleUpperCase()
+
+11、字符串模式匹配方法
+
+- match()方法 （ 和RegExp对象的exec()方法相同 ）
+- search()方法
+```
+let text = "cat, bat, sat, fat"; 
+let pos = text.search(/at/); 
+console.log(pos); // 1 
+```
+这里，search(/at/)返回 1，即"at"的第一个字符在字符串中的位置。
+ 
+- replace()
+```angular2html
+let text = "cat, bat, sat, fat"; 
+let result = text.replace("at", "ond"); 
+console.log(result); // "cond, bat, sat, fat" 
+result = text.replace(/at/g, "ond"); 
+console.log(result); // "cond, bond, sond, fond"
+```
