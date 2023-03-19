@@ -349,3 +349,83 @@ console.log(result); // "cond, bat, sat, fat"
 result = text.replace(/at/g, "ond"); 
 console.log(result); // "cond, bond, sond, fond"
 ```
+12、localCompare()
+- 比较两个字符串
+  - 如果按照字母表顺序，字符串应该排在字符串参数前头，则返回负值。（通常是-1，具体还要看
+与实际值相关的实现。）
+  - 如果字符串与字符串参数相等，则返回 0。
+  - 如果按照字母表顺序，字符串应该排在字符串参数后头，则返回正值。（通常是 1，具体还要看
+与实际值相关的实现。
+  - 
+```javascript
+  let stringValue = "yellow"; 
+  
+  console.log(stringValue.localeCompare("brick")); // 1 
+  console.log(stringValue.localeCompare("yellow")); // 0 
+  console.log(stringValue.localeCompare("zoo")); // -1 
+  
+```
+
+13、HTML方法
+## 5.4 单例内置对象
+### 5.4.1 Global
+1、URL编码方法
+- encodeURI():encodeURI()不会编码属于 URL 组件的特殊字符，比如冒号、斜杠、问号、
+井号
+- encodeURIComponent():会编码它发现的所有非标准字符
+
+举例：
+```
+  let uri = "http://www.wrox.com/illegal value.js#start"; 
+  // "http://www.wrox.com/illegal%20value.js#start" 
+  console.log(encodeURI(uri)); 
+  
+  // "http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.js%23start" 
+  console.log(encodeURIComponent(uri));
+```  
+
+- decodeURI(): 只对使用 encodeURI()编码过的字符解码
+- decodeURIComponent():解码所有被 encodeURIComponent()编码的字符，基本上就是解码所有特殊值。
+
+2、eval()方法
+
+```javascript
+eval("console.log('hi')"); 
+```
+上面这行代码的功能与下一行等价：
+
+`console.log("hi");`
+
+3、Global对象属性
+
+4、window对象
+
+虽然 ECMA-262 没有规定直接访问 Global 对象的方式，但浏览器将 window 对象实现为 Global
+对象的代理。
+
+```javascript
+var color = "red"; 
+function sayColor() { 
+ console.log(window.color); 
+} 
+window.sayColor(); // "red"
+```
+
+这里定义了一个名为color的全局变量和一个名为sayColor()的全局函数。在sayColor()内部，
+通过 window.color 访问了 color 变量，说明全局变量变成了 window 的属性。接着，又通过 window
+对象直接调用了 window.sayColor()函数，从而输出字符串。
+
+另一种获取 Global 对象的方式是使用如下的代码：
+```javascript
+let global = function() { 
+ return this; 
+}();
+```
+
+这段代码创建一个立即调用的函数表达式，返回了 this 的值。如前所述，当一个函数在没有明确
+（通过成为某个对象的方法，或者通过 call()/apply()）指定 this 值的情况下执行时，this 值等于
+Global 对象。因此，调用一个简单返回 this 的函数是在任何执行上下文中获取 Global 对象的通用
+方式。
+
+### 5.4.2 Math
+
