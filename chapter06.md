@@ -22,32 +22,44 @@ let colors = new Array(3);//创建一个包含3个元素的数组
 let names = [] //创建一个空数组
 ```
 - Array.from():用于将类数组结构转换为数组实例
+
 ![img_14.png](img_14.png)
+
 ![img_15.png](img_15.png)
 - Array.of():用于将一组参数转换为数组实例
+
 ![img_16.png](img_16.png)
 ### 6.2.2 数组空位
 使用数组字面量初始化数组时，可以使用一串逗号来创建空位（hole）。
+
 ![img_17.png](img_17.png)
 ### 6.2.3 数组索引
 1、如果把一个值设置给超过数组最大索引的索引，就像示例中的 colors[3]，则数组长度会自动扩
 展到该索引值加 1（示例中设置的索引 3，所以数组长度变成了 4）
+
 ![img_18.png](img_18.png)
+
 2、数组 colors 一开始有 3 个值。将 length 设置为 2，就删除了最后一个（位置 2 的）值，
 因此 colors[2]就没有值了。
+
 ![img_20.png](img_20.png)
 ### 6.2.4 检测数组
 下面两个方法在判断一个对象是否是数组。
-- instanceof]
+- instanceof
+
 ![img_21.png](img_21.png)
 - Array.isArray()
+
 ![img_22.png](img_22.png)
 ### 6.2.5 迭代器方法
 在 ES6 中，Array 的原型上暴露了 3 个用于检索数组内容的方法：keys()、values()和
 entries()。keys()返回数组索引的迭代器，values()返回数组元素的迭代器，而 entries()返回
 索引/值对的迭代器：
+
 ![img_24.png](img_24.png)
+
 如果直接打印，只会显示迭代器：
+
 ![img_25.png](img_25.png)
 
 ![img_26.png](img_26.png)
