@@ -56,10 +56,12 @@ entries()。keys()返回数组索引的迭代器，values()返回数组元素的
 使用 fill()方法可以向一个已有的数组中插入全部或部分相同的值。开始索引用于指定开始填充
 的位置，它是可选的。如果不提供结束索引，则一直填充到数组末尾。负值索引从数组末尾开始计算。
 也可以将负索引想象成数组长度加上它得到的一个正索引：
+
 ![img_27.png](img_27.png)
 - copyWithin()
 与 fill()不同，copyWithin()会按照指定范围浅复制数组中的部分内容，然后将它们插入到指
 定索引开始的位置。开始索引和结束索引则与 fill()使用同样的计算方法：
+
 ![img_28.png](img_28.png)
 ### 6.2.7 转换方法
 - valueOf()：返回的是数组本身
@@ -71,8 +73,10 @@ alert(colors.valueOf()); // red,blue,green
 - toLocaleString()：在调用数组的toLocaleString()方法时，会得到一个逗号分隔的数组值的字符串。它与另外两个方法
 唯一的区别是，为了得到最终的字符串，会调用数组每个值的 toLocaleString()方法，而不是
 toString()方法。
+
 ![img_29.png](img_29.png)
 - join()：分割字符串
+
 ![img_30.png](img_30.png)
 ### 6.2.8 栈方法
 - pop()
